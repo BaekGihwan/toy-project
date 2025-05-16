@@ -34,9 +34,17 @@ public class LottoDrawnSdo {
     @JsonProperty
     private int firstPrzwnerCo;  // 1등 당첨자 수
     @JsonProperty
-    private int firstAccumamnt;
+    private long firstAccumamnt;
     @JsonProperty
     private long totSellamnt;    // 총 판매금액
+
+    @Override
+    public String toString() {
+        return String.format(
+                "로또 %d회차 (%s) - 당첨번호: %d, %d, %d, %d, %d, %d, 보너스: %d",
+                drwNo, drwNoDate, drwtNo1, drwtNo2, drwtNo3, drwtNo4, drwtNo5, drwtNo6, bnusNo
+        );
+    }
 }
 
 

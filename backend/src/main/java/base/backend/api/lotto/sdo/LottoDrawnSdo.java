@@ -1,5 +1,6 @@
 package base.backend.api.lotto.sdo;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 

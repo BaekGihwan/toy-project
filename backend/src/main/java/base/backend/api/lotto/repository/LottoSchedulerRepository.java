@@ -32,7 +32,7 @@ public class LottoSchedulerRepository {
             Element element = doc.getElementById("lottoDrwNo");
 
             if (element != null) {
-                return Integer.parseInt(element.text()); // 요소의 텍스트 값(회차 번호) 반환을 반환해서 Integer로 변경
+                return Integer.parseInt(element.text()); // 요소의 텍스트 값(회차 번호) Integer로 변경
             } else {
                 throw new RuntimeException("로또 회차 정보를 찾을 수 없습니다.");
             }

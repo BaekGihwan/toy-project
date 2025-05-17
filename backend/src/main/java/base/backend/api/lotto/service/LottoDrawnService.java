@@ -2,7 +2,7 @@ package base.backend.api.lotto.service;
 
 
 import base.backend.api.lotto.domain.LottoDrawn;
-import base.backend.api.lotto.repository.LottoDataRepository;
+import base.backend.api.lotto.repository.LottoDrawnRepository;
 import base.backend.api.lotto.sdo.LottoDrawnSdo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,20 +10,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class LottoDataService {
+public class LottoDrawnService {
 
-    private final LottoDataRepository lottoDataRepository;
+    private final LottoDrawnRepository lottoDrawnRepository;
 
     @Transactional(readOnly = true)
     public int getLastDrawnNo() {
 
         // drw_no가 가장 큰 한개만 가져와야댐
-        LottoDrawn lastDrawn = lottoDataRepository.findTopByOrderByDrwNoDesc();
+        LottoDrawn lastDrawn = lottoDrawnRepository.findTopByOrderByDrwNoDesc();
         return Integer.parseInt(lastDrawn != null ? String.valueOf(lastDrawn.getDrwNo()) : "");
     }
 
     @Transactional
-    public LottoDrawn insertLottoDrawnData(LottoDrawnSdo lottoDrawnSdo) {
+    public void insertLottoDrawnData(LottoDrawnSdo lottoDrawnSdo) {
 
         LottoDrawn lottoDraw = new LottoDrawn();
         // lottoDrawnSdo >  lottoDraw 엔티티로 변경
@@ -38,7 +38,23 @@ public class LottoDataService {
         lottoDraw.setDrwNoDate(lottoDrawnSdo.getDrwNoDate());
 
         // 하이버네이트 save사용
-       return lottoDataRepository.save(lottoDraw);
-
+        lottoDrawnRepository.save(lottoDraw);
     }
+
+//    @Transactional
+//    public void insertBuyLottoData(LocalDateTime currentDate) {
+//
+//        LottoPurchase lottoPurchase = new LottoPurchase();
+//        lottoPurchase.setPurchaseNo(1171);
+//        lottoPurchase.setPurchaseNo1(1);
+//        lottoPurchase.setPurchaseNo2(2);
+//        lottoPurchase.setPurchaseNo3(3);
+//        lottoPurchase.setPurchaseNo4(4);
+//        lottoPurchase.setPurchaseNo5(5);
+//        lottoPurchase.setPurchaseNo6(6);
+//        lottoPurchase.setPurchaseBnusNo(7);
+//        lottoPurchase.setPurchaseDate(currentDate);
+//
+//        lottoDataRepository.save(lottoPurchase);
+//    }
 }

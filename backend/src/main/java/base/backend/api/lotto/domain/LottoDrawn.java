@@ -1,5 +1,6 @@
 package base.backend.api.lotto.domain;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 

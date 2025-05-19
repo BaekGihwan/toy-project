@@ -26,17 +26,11 @@ public class LottoBuyService {
 
         // 1 ~ 45 숫자중 6개 랜덤 / 중복제거 / 낮은수부터 정렬
         List<Integer> lottoNumbers = random.ints(LottoConstants.MIN_LOTTO_NUMBER, LottoConstants.MAX_LOTTO_NUMBER)
-                .distinct()
-                .limit(6)
-                .boxed()
-                .sorted()
-                .toList();
-
-        // 보너스 번호는 1-45 중에서 당첨 번호를 제외한 숫자들 중 하나 가져오기
-        int bonusNumber = random.ints(LottoConstants.MIN_LOTTO_NUMBER, LottoConstants.MAX_LOTTO_NUMBER)
-                .filter(n -> !lottoNumbers.contains(n))
-                .findFirst()
-                .orElseThrow();
+            .distinct()
+            .limit(6)
+            .boxed()
+            .sorted()
+            .toList();
 
         // lottoPurchase 엔티티에 넣기
         lottoPurchase.setPurchaseNo(buyLottoDrwNo);
@@ -46,7 +40,6 @@ public class LottoBuyService {
         lottoPurchase.setPurchaseNo4(lottoNumbers.get(3));
         lottoPurchase.setPurchaseNo5(lottoNumbers.get(4));
         lottoPurchase.setPurchaseNo6(lottoNumbers.get(5));
-        lottoPurchase.setPurchaseBonusNo(bonusNumber);
         lottoPurchase.setPurchaseDate(currentDate);
 
         // 하이버네이트 save사용

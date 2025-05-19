@@ -23,7 +23,7 @@ public class LottoDrawnService {
     }
 
     @Transactional
-    public void insertLottoDrawnData(LottoDrawnSdo lottoDrawnSdo) {
+    public void insertLottoWinningData(LottoDrawnSdo lottoDrawnSdo) {
 
         LottoDrawn lottoDraw = new LottoDrawn();
         // lottoDrawnSdo >  lottoDraw 엔티티로 변경
@@ -40,21 +40,4 @@ public class LottoDrawnService {
         // 하이버네이트 save사용
         lottoDrawnRepository.save(lottoDraw);
     }
-
-//    @Transactional
-//    public void insertBuyLottoData(LocalDateTime currentDate) {
-//
-//        LottoPurchase lottoPurchase = new LottoPurchase();
-//        lottoPurchase.setPurchaseNo(1171);
-//        lottoPurchase.setPurchaseNo1(1);
-//        lottoPurchase.setPurchaseNo2(2);
-//        lottoPurchase.setPurchaseNo3(3);
-//        lottoPurchase.setPurchaseNo4(4);
-//        lottoPurchase.setPurchaseNo5(5);
-//        lottoPurchase.setPurchaseNo6(6);
-//        lottoPurchase.setPurchaseBnusNo(7);
-//        lottoPurchase.setPurchaseDate(currentDate);
-//
-//        lottoDataRepository.save(lottoPurchase);
-//    }
 }

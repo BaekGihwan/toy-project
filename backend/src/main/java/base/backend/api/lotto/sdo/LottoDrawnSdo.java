@@ -38,6 +38,7 @@ public class LottoDrawnSdo {
     private long firstAccumamnt;
     @JsonProperty
     private long totSellamnt;    // 총 판매금액
+    private String drawnCombinedNumber;
 
     @Override
     public String toString() {

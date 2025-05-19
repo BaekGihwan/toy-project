@@ -37,17 +37,14 @@ public class LottoPurchase {
     @Column(name = "purchase_no6")
     private int purchaseNo6;
 
-    @Column(name = "purchase_bonus_no")
-    private int purchaseBonusNo;
-
     @Column(name = "purchase_date")
     private LocalDateTime purchaseDate;
 
     @Override
     public String toString() {
         return String.format(
-                "로또 %d회차 (%s) - 구매번호: %d, %d, %d, %d, %d, %d, 보너스: %d",
-                purchaseNo, purchaseDate, purchaseNo1, purchaseNo2, purchaseNo3, purchaseNo4, purchaseNo5, purchaseNo6, purchaseBonusNo
+                "로또 %d회차 (%s) - 구매번호: %d, %d, %d, %d, %d, %d",
+                purchaseNo, purchaseDate, purchaseNo1, purchaseNo2, purchaseNo3, purchaseNo4, purchaseNo5, purchaseNo6
         );
     }
 }

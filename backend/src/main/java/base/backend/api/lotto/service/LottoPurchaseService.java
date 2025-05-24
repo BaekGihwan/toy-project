@@ -3,7 +3,7 @@ package base.backend.api.lotto.service;
 
 import base.backend.api.common.constants.LottoConstants;
 import base.backend.api.lotto.domain.LottoPurchase;
-import base.backend.api.lotto.repository.LottoBuyRepository;
+import base.backend.api.lotto.repository.LottoPurchaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +14,9 @@ import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
-public class LottoBuyService {
+public class LottoPurchaseService {
 
-    private final LottoBuyRepository lottoBuyRepository;
+    private final LottoPurchaseRepository lottoPurchaseRepository;
 
     @Transactional
     public void insertBuyLottoData(LocalDateTime currentDate, int buyLottoDrwNo) {
@@ -43,6 +43,6 @@ public class LottoBuyService {
         lottoPurchase.setPurchaseDate(currentDate);
 
         // 하이버네이트 save사용
-        lottoBuyRepository.save(lottoPurchase);
+        lottoPurchaseRepository.save(lottoPurchase);
     }
 }

@@ -37,7 +37,7 @@ public class LottoSchedulerRepository {
                 throw new RuntimeException("로또 회차 정보를 찾을 수 없습니다.");
             }
         } catch (IOException e) {
-            throw new RuntimeException("로또 정보를 가져오는 중 오류가 발생했습니다: " + e.getMessage());
+            throw new RuntimeException("로또 웹페이지 접속 불가: " + e.getMessage());
         }
     }
 

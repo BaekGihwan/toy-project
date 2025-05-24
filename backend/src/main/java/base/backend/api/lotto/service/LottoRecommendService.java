@@ -2,7 +2,7 @@ package base.backend.api.lotto.service;
 
 import base.backend.api.lotto.domain.LottoDrawn;
 import base.backend.api.lotto.domain.LottoPurchase;
-import base.backend.api.lotto.repository.LottoBuyRepository;
+import base.backend.api.lotto.repository.LottoPurchaseRepository;
 import base.backend.api.lotto.repository.LottoDrawnRepository;
 import base.backend.api.lotto.repository.LottoRecommendRepository;
 import base.backend.api.lotto.sdo.LottoDrawnSdo;
@@ -10,14 +10,11 @@ import base.backend.api.lotto.sdo.LottoRecommendSdo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.AbstractMap;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +22,7 @@ public class LottoRecommendService {
 
     private final LottoDrawnRepository lottoDrawnRepository;
     private final LottoRecommendRepository lottoRecommendRepository;
-    private final LottoBuyRepository lottoBuyRepository;
+    private final LottoPurchaseRepository lottoPurchaseRepository;
 
     public List<LottoRecommendSdo> getLottoRecommendNumbers(int  currentLottoDrwNo) {
 
@@ -56,10 +53,10 @@ public class LottoRecommendService {
             .toList();
 
         // 3. 이번회차 구매번호 가져오기
-        List<LottoPurchase> purchaseResultList = lottoBuyRepository.findAllByPurchaseNo(currentLottoDrwNo + 1);
+        List<LottoPurchase> purchaseResultList = lottoPurchaseRepository.findAllByPurchaseNo(currentLottoDrwNo + 1);
         // 4. 6자리를 조합하여 drawnCombinedNumber에 넣기
         List<LottoRecommendSdo> purchaseResultListAddCombinedNumberAndCount = purchaseResultList.stream()
-                // 1. 번호 조합 문자열 생성 및 그룹화하여 카운트 (날짜 정보와 회차 정보 포함)
+            // 1. 번호 조합 문자열 생성 및 그룹화하여 카운트 (날짜 정보와 회차 정보 포함)
             .collect(Collectors.groupingBy(
                 purchaseList -> new AbstractMap.SimpleEntry<>(
                     new AbstractMap.SimpleEntry<>(

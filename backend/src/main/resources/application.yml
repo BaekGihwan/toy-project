@@ -1,11 +1,17 @@
+jasypt:
+  encryptor:
+    password: ${JASYPT_PASSWORD:toy-project-secret-key}  # 실제 운영 환경에서는 환경 변수로 설정
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
 spring:
   application:
     name: backend
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://211.63.24.117:3306/lotto?serverTimezone=Asia/Seoul
-    username: toy_project
-    password: toy_project
+    url: ENC(YxSp+roW7X+ylJIuXe6arVK/Zgl3E6rTGiwK5oUcA6guagC+1fh/P1CVTAYH+f7t+bb4jv2PtvzsqFtO3SavLZjxYcg+JG1x)
+    username: ENC(kCmgKlNkQjEHDLK+kjh+njpDXXkm4yaY)
+    password: ENC(Ldho3ow/O440TTjjTYODb5co3y8wJEDs)
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:

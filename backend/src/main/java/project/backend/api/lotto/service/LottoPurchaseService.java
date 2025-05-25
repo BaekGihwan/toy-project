@@ -1,9 +1,9 @@
-package base.backend.api.lotto.service;
+package project.backend.api.lotto.service;
 
 
-import base.backend.api.common.constants.LottoConstants;
-import base.backend.api.lotto.domain.LottoPurchase;
-import base.backend.api.lotto.repository.LottoPurchaseRepository;
+import project.backend.api.common.constants.LottoConstants;
+import project.backend.api.lotto.domain.LottoPurchase;
+import project.backend.api.lotto.repository.LottoPurchaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

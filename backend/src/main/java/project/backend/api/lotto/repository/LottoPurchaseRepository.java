@@ -1,7 +1,7 @@
-package base.backend.api.lotto.repository;
+package project.backend.api.lotto.repository;
 
 
-import base.backend.api.lotto.domain.LottoPurchase;
+import project.backend.api.lotto.domain.LottoPurchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

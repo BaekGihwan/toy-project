@@ -1,4 +1,4 @@
-package base.backend.api.common.constants;
+package project.backend.api.common.constants;
 
 public final class LottoConstants {
     // 로또 데이터 관련 상수 데이터

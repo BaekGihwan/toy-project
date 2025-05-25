@@ -1,12 +1,12 @@
-package base.backend.api.lotto.controller;
+package project.backend.api.lotto.controller;
 
 
-import base.backend.api.lotto.sdo.LottoDrawnSdo;
-import base.backend.api.lotto.sdo.LottoRecommendSdo;
-import base.backend.api.lotto.service.LottoPurchaseService;
-import base.backend.api.lotto.service.LottoDrawnService;
-import base.backend.api.lotto.service.LottoRecommendService;
-import base.backend.api.lotto.service.LottoSchedulerService;
+import project.backend.api.lotto.sdo.LottoDrawnSdo;
+import project.backend.api.lotto.sdo.LottoRecommendSdo;
+import project.backend.api.lotto.service.LottoPurchaseService;
+import project.backend.api.lotto.service.LottoDrawnService;
+import project.backend.api.lotto.service.LottoRecommendService;
+import project.backend.api.lotto.service.LottoSchedulerService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;

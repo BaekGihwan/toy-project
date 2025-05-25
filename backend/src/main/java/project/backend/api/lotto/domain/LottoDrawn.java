@@ -1,4 +1,4 @@
-package base.backend.api.lotto.domain;
+package project.backend.api.lotto.domain;
 
 
 import jakarta.persistence.*;

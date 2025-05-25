@@ -1,8 +1,8 @@
-package base.backend.api.lotto.repository;
+package project.backend.api.lotto.repository;
 
 
-import base.backend.api.common.constants.LottoConstants;
-import base.backend.api.lotto.sdo.LottoDrawnSdo;
+import project.backend.api.common.constants.LottoConstants;
+import project.backend.api.lotto.sdo.LottoDrawnSdo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;

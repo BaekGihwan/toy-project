@@ -1,9 +1,9 @@
-package base.backend.api.lotto.service;
+package project.backend.api.lotto.service;
 
 
-import base.backend.api.lotto.domain.LottoDrawn;
-import base.backend.api.lotto.repository.LottoDrawnRepository;
-import base.backend.api.lotto.sdo.LottoDrawnSdo;
+import project.backend.api.lotto.domain.LottoDrawn;
+import project.backend.api.lotto.repository.LottoDrawnRepository;
+import project.backend.api.lotto.sdo.LottoDrawnSdo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

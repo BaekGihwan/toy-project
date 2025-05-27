@@ -1,14 +1,17 @@
-package project.backend.api.lotto.service;
+package project.backend.api.lotto.service.flow;
 
-import project.backend.api.lotto.domain.LottoDrawn;
-import project.backend.api.lotto.domain.LottoPurchase;
-import project.backend.api.lotto.repository.LottoPurchaseRepository;
-import project.backend.api.lotto.repository.LottoDrawnRepository;
-import project.backend.api.lotto.repository.LottoRecommendRepository;
-import project.backend.api.lotto.sdo.LottoDrawnSdo;
-import project.backend.api.lotto.sdo.LottoRecommendSdo;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import project.backend.api.lotto.domain.LottoDrawn;
+import project.backend.api.lotto.domain.LottoPurchase;
+import project.backend.api.lotto.domain.LottoRecommend;
+import project.backend.api.lotto.sdo.LottoDrawnSdo;
+import project.backend.api.lotto.sdo.LottoRecommendSdo;
+import project.backend.api.lotto.service.crud.LottoDrawnService;
+import project.backend.api.lotto.service.crud.LottoPurchaseService;
+import project.backend.api.lotto.service.crud.LottoRecommendService;
 
 import java.time.LocalDateTime;
 import java.util.AbstractMap;
@@ -16,18 +19,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
-public class LottoRecommendService {
+public class LottoRecommendFlowService {
 
-    private final LottoDrawnRepository lottoDrawnRepository;
-    private final LottoRecommendRepository lottoRecommendRepository;
-    private final LottoPurchaseRepository lottoPurchaseRepository;
+    private final LottoDrawnService lottoDrawnService;
+    private final LottoPurchaseService lottoPurchaseService;
+    private final LottoRecommendService lottoRecommendService;
 
-    public List<LottoRecommendSdo> getLottoRecommendNumbers(int  currentLottoDrwNo) {
+    public List<LottoRecommendSdo> getRecommendedLottoNumbers() {
 
         // 1. 역대 당첨번호 가져오기 && 데이터 가공
-        List<LottoDrawn> drawnResultList = lottoDrawnRepository.findAll();
+        List<LottoDrawn> drawnResultList = lottoDrawnService.findAllByOrderByDrwNoDesc();
         // 2. 6자리를 조합하여 drawnCombinedNumber에 넣기
         List<LottoDrawnSdo> drawnResultListAddCombinedNumber = drawnResultList.stream()
             .map(drawnList -> {
@@ -52,11 +56,10 @@ public class LottoRecommendService {
             .sorted(Comparator.comparing(LottoDrawnSdo::getDrwNo).reversed()) // 기본이 ASC / reversed DESC
             .toList();
 
-        // 3. 이번회차 구매번호 가져오기
-        List<LottoPurchase> purchaseResultList = lottoPurchaseRepository.findAllByPurchaseNo(currentLottoDrwNo + 1);
-        // 4. 6자리를 조합하여 drawnCombinedNumber에 넣기
+        // 3. 추천회차 구매내역 가져오기
+        List<LottoPurchase> purchaseResultList = lottoPurchaseService.findAllByOrderByPurchaseIdDesc(drawnResultListAddCombinedNumber.get(0).getDrwNo() + 1);
+        // 4. 6자리를 조합하여 purchaseCombinedNumber에 넣기
         List<LottoRecommendSdo> purchaseResultListAddCombinedNumberAndCount = purchaseResultList.stream()
-            // 1. 번호 조합 문자열 생성 및 그룹화하여 카운트 (날짜 정보와 회차 정보 포함)
             .collect(Collectors.groupingBy(
                 purchaseList -> new AbstractMap.SimpleEntry<>(
                     new AbstractMap.SimpleEntry<>(
@@ -73,7 +76,6 @@ public class LottoRecommendService {
                 ),
                 Collectors.counting()
             ))
-            // 2. Map 엔트리를 LottoRecommendSdo 객체로 변환
             .entrySet().stream()
             .map(entry -> {
                 String combinedNumber = entry.getKey().getKey().getKey(); // 번호 조합
@@ -103,6 +105,11 @@ public class LottoRecommendService {
             .sorted(Comparator.comparing(LottoRecommendSdo::getDuplicateCount).thenComparing(LottoRecommendSdo::getPurchaseNo))
             .limit(5)
             .toList();
+
+        // 데이터 저장 - SDO를 도메인 엔티티로 변환하여 저장
+        LottoRecommendList.stream()
+            .map(LottoRecommend::LottoRecommendSdo)
+            .forEach(lottoRecommendService::registerLottoRecommendNumbers);
 
         return LottoRecommendList;
     }

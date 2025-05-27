@@ -1,47 +1,43 @@
 package project.backend.api.lotto.domain;
 
 
-import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import project.backend.api.lotto.sdo.LottoDrawnSdo;
 
-@Entity
-@Data
-@Table(name = "t_lotto_drawn")
-public class LottoDrawn {
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode
+public class LottoDrawn {  // Drawn: 이미 뽑힌, 추첨된 (과거분사/형용사)
 
-    @Id
-    @Column(name = "drw_no")
     private int drwNo;
-
-    @Column(name = "drwt_no1")
     private int drwtNo1;
-
-    @Column(name = "drwt_no2")
     private int drwtNo2;
-
-    @Column(name = "drwt_no3")
     private int drwtNo3;
-
-    @Column(name = "drwt_no4")
     private int drwtNo4;
-
-    @Column(name = "drwt_no5")
     private int drwtNo5;
-
-    @Column(name = "drwt_no6")
     private int drwtNo6;
-
-    @Column(name = "bnus_no")
     private int bnusNo;
-
-    @Column(name = "drw_no_date")
     private String drwNoDate;
 
-    @Override
-    public String toString() {
-        return String.format(
-                "로또 %d회차 (%s) - 당첨번호: %d, %d, %d, %d, %d, %d, 보너스: %d",
-                drwNo, drwNoDate, drwtNo1, drwtNo2, drwtNo3, drwtNo4, drwtNo5, drwtNo6, bnusNo
-        );
+    // Sdo -> domain
+    public static LottoDrawn lottoDrawnSdo(LottoDrawnSdo lottoDrawnSdo) {
+        return LottoDrawn.builder()
+            .drwNo(lottoDrawnSdo.getDrwNo())
+            .drwNoDate(lottoDrawnSdo.getDrwNoDate())
+            .drwtNo1(lottoDrawnSdo.getDrwtNo1())
+            .drwtNo2(lottoDrawnSdo.getDrwtNo2())
+            .drwtNo3(lottoDrawnSdo.getDrwtNo3())
+            .drwtNo4(lottoDrawnSdo.getDrwtNo4())
+            .drwtNo5(lottoDrawnSdo.getDrwtNo5())
+            .drwtNo6(lottoDrawnSdo.getDrwtNo6())
+            .bnusNo(lottoDrawnSdo.getBnusNo())
+            .build();
     }
 }

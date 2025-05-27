@@ -1,21 +1,18 @@
-package project.backend.api.lotto.domain;
+package project.backend.api.lotto.sdo;
 
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Getter
 @Builder
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@EqualsAndHashCode
-public class LottoPurchase {
+@NoArgsConstructor
+public class LottoPurchaseSdo {
 
     private int purchaseId;
     private int purchaseNo;
@@ -26,4 +23,5 @@ public class LottoPurchase {
     private int purchaseNo5;
     private int purchaseNo6;
     private LocalDateTime purchaseDate;
+    private String purchaseCombinedNumber;
 }

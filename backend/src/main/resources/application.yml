@@ -20,3 +20,4 @@ spring:
       hibernate:
         show_sql: none
         format_sql: true
+        physical_naming_strategy: project.backend.api.common.config.JpaConfig$CustomPhysicalNamingStrategy

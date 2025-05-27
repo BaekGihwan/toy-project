@@ -21,8 +21,8 @@ public class LottoPurchaseStore {
         lottoPurchaseRepository.save(new LottoPurchaseJpo(lottoPurchase));
     }
 
-    public List<LottoPurchase> findAllByOrderByPurchaseIdDesc(int targetDrawnNo) {
-        return lottoPurchaseRepository.findAllByOrderByDrwNoDesc(targetDrawnNo).stream()
+    public List<LottoPurchase> findAllByPurchaseNoOrderByPurchaseIdDesc(int purchaseNo) {
+        return lottoPurchaseRepository.findAllByPurchaseNoOrderByPurchaseIdDesc(purchaseNo).stream()
             .map(LottoPurchaseJpo::toDomain)
             .toList();
     }

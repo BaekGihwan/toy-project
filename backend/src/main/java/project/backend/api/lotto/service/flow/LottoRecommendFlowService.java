@@ -57,7 +57,7 @@ public class LottoRecommendFlowService {
             .toList();
 
         // 3. 추천회차 구매내역 가져오기
-        List<LottoPurchase> purchaseResultList = lottoPurchaseService.findAllByOrderByPurchaseIdDesc(drawnResultListAddCombinedNumber.get(0).getDrwNo() + 1);
+        List<LottoPurchase> purchaseResultList = lottoPurchaseService.findAllByPurchaseNoOrderByPurchaseIdDesc(drawnResultListAddCombinedNumber.get(0).getDrwNo() + 1);
         // 4. 6자리를 조합하여 purchaseCombinedNumber에 넣기
         List<LottoRecommendSdo> purchaseResultListAddCombinedNumberAndCount = purchaseResultList.stream()
             .collect(Collectors.groupingBy(

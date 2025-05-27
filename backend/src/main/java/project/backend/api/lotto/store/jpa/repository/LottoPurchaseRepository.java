@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface LottoPurchaseRepository extends JpaRepository<LottoPurchaseJpo, Integer> {
 
-    List<LottoPurchaseJpo> findAllByOrderByDrwNoDesc(int targetDrawnNo);
+    List<LottoPurchaseJpo> findAllByPurchaseNoOrderByPurchaseIdDesc(int purchaseNo);
 }

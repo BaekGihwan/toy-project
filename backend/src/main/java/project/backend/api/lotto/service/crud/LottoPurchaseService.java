@@ -46,7 +46,7 @@ public class LottoPurchaseService {
             .toList();
     }
 
-    public List<LottoPurchase> findAllByOrderByPurchaseIdDesc(int targetDrawnNo) {
-        return lottoPurchaseStore.findAllByOrderByPurchaseIdDesc(targetDrawnNo);
+    public List<LottoPurchase> findAllByPurchaseNoOrderByPurchaseIdDesc(int targetDrawnNo) {
+        return lottoPurchaseStore.findAllByPurchaseNoOrderByPurchaseIdDesc(targetDrawnNo);
     }
 }

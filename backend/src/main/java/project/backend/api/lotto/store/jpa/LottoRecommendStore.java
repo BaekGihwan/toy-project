@@ -16,6 +16,7 @@ public class LottoRecommendStore {
 
     private final LottoRecommendRepository lottoRecommendRepository;
 
+    @Transactional
     public void save(LottoRecommend lottoRecommend) {
         lottoRecommendRepository.save(new LottoRecommendJpo(lottoRecommend));
     }

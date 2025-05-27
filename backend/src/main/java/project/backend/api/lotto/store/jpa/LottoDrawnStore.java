@@ -23,6 +23,7 @@ public class LottoDrawnStore {
             .orElse(null);
     }
 
+    @Transactional
     public void save(LottoDrawnSdo lottoDrawnSdo) {
         // SDO -> 도메인 -> JPO 변환 후 저장
         LottoDrawn lottoDrawn = LottoDrawn.lottoDrawnSdo(lottoDrawnSdo);

@@ -20,6 +20,7 @@ public class LottoPurchaseService {
     private final LottoPurchaseStore lottoPurchaseStore;
     private final Random random = new Random();
 
+    @Transactional
     public void registerPurchaseLotto(LocalDateTime currentDate, int purchaseLottoNo) {
         List<Integer> lottoNumbers = generateRandomLottoNumbers();
 

@@ -19,6 +19,7 @@ public class LottoDrawnNumbersFlowService {
     private final LottoApiService lottoApiService;
     private final LottoDrawnService lottoDrawnService;
 
+    @Transactional
     public void getLottoDrawnNumbers() {
 
         // 크롤링해서 현재 동행복권의 회차를 가져오기

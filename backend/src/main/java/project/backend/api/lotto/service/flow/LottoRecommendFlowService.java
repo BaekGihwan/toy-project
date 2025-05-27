@@ -28,6 +28,7 @@ public class LottoRecommendFlowService {
     private final LottoPurchaseService lottoPurchaseService;
     private final LottoRecommendService lottoRecommendService;
 
+    @Transactional
     public List<LottoRecommendSdo> getRecommendedLottoNumbers() {
 
         // 1. 역대 당첨번호 가져오기 && 데이터 가공

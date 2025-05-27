@@ -17,6 +17,7 @@ public class LottoPurchaseStore {
 
     private final LottoPurchaseRepository lottoPurchaseRepository;
 
+    @Transactional
     public void save(LottoPurchase  lottoPurchase) {
         lottoPurchaseRepository.save(new LottoPurchaseJpo(lottoPurchase));
     }

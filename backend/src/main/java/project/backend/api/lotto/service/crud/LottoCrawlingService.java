@@ -20,7 +20,7 @@ public class LottoCrawlingService {
             // Jsoup을 사용하여 웹페이지 내용 가져오기
             Document doc = Jsoup.connect(LottoConstants.LOTTO_URL).get();
             // id가 "lottoDrwNo"인 요소 찾기
-            Element element = doc.getElementById("lottoDrawnNo");
+            Element element = doc.getElementById("lottoDrwNo");
 
             if (element != null) {
                 return Integer.parseInt(element.text());

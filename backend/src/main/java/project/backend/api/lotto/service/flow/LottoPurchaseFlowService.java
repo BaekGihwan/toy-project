@@ -18,6 +18,7 @@ public class LottoPurchaseFlowService {
     private final LottoDrawnService lottoDrawnService;
     private final LottoPurchaseService lottoPurchaseService;
 
+    @Transactional
     public void registerPurchaseLotto() {
         LocalDateTime currentDate = LocalDateTime.now();
         int currentDayValue = currentDate.getDayOfWeek().getValue();

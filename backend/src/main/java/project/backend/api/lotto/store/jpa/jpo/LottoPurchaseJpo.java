@@ -61,6 +61,7 @@ public class LottoPurchaseJpo {
     private LocalDateTime purchaseDate;
 
     public LottoPurchaseJpo(LottoPurchase lottoPurchase) {
+        this.purchaseId = lottoPurchase.getPurchaseId();
         this.purchaseNo = lottoPurchase.getPurchaseNo();
         this.purchaseNo1 = lottoPurchase.getPurchaseNo1();
         this.purchaseNo2 = lottoPurchase.getPurchaseNo2();

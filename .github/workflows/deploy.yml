@@ -43,7 +43,7 @@ jobs:
       - name: 배포 상태 확인
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.AP_SERVER_IP}}
+          host: ${{ secrets.AP_SERVER_IP }}
           username: ${{ secrets.AP_SERVER_USERNAME }}
           key: ${{ secrets.AP_SERVER_SSH_KEY }}
           script:

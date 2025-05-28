@@ -1,0 +1,51 @@
+name: 프로덕션 서버 배포
+
+on:
+  workflow_run:
+    workflows: [ "Full Stack CI/CD Pipeline" ]  # 빌드 워크플로우가 완료된 후 실행
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # 빌드가 성공적으로 완료된 경우에만 실행
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+      - name: Nexus 서버를 통한 AP 서버 배포
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AP_SERVER_IP }}  # AP 서버 내부 IP
+          username: ${{ secrets.AP_SERVER_USERNAME }}
+          key: ${{ secrets.AP_SERVER_SSH_KEY }}
+          script: |
+            #  Nexus 서버 로그인
+                    echo ${{ secrets.NEXUS_PASSWORD }} | docker login ${{ secrets.NEXUS_SERVER_IP }} -u ${{ secrets.NEXUS_USERNAME }} --password-stdin
+            # 최신 이미지 가져오기 (내부 IP 사용)
+                    docker pull ${{ secrets.NEXUS_SERVER_IP }}/gh-toy-project-app:latest
+            # 기존 컨테이너 중지 및 제거 (없는 경우 무시)
+                    docker stop gh-toy-project-app || true
+                    docker rm gh-toy-project-app || true
+            # 새 컨테이너 실행
+                    docker run -d \
+                    --name gh-toy-project-app \
+                    --restart unless-stopped \
+                    -p 8080:8080 \
+                    -e SPRING_PROFILES_ACTIVE=prod \
+                    -e NEXUS_REGISTRY_INTERNAL=${{ secrets.NEXUS_SERVER_IP }}/ \
+                    -e NEXUS_REGISTRY_EXTERNAL=211.63.24.117 \
+                    ${{ secrets.NEXUS_SERVER_IP }}//gh-toy-project-app:latest
+
+      # 배포 상태 확인
+      - name: 배포 상태 확인
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AP_SERVER_IP}}
+          username: ${{ secrets.AP_SERVER_USERNAME }}
+          key: ${{ secrets.AP_SERVER_SSH_KEY }}
+          script:
+            docker ps | grep gh-toy-project-app  # 컨테이너 상태 확인
+            curl -f http://localhost:8080/actuator/health || exit 1 # 애플리케이션 헬스 체크

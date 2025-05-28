@@ -32,7 +32,7 @@ public class LottoPurchaseFlowService {
         if ((currentDayValue >= 1 && currentDayValue <= 5) ||   // 월요일부터 금요일까지 전체
                 (currentDayValue == 6 && currentHour <= 20) ||      // 토요일 20:00 이전
                 (currentDayValue == 7 && currentHour >= 6)) {       // 일요일 06:00 이후
-            lottoPurchaseService.registerPurchaseLotto(currentDate, purchaseLottoNo);
+            lottoPurchaseService.registerPurchaseLottoNumbers(currentDate, purchaseLottoNo);
         }
     }
 }

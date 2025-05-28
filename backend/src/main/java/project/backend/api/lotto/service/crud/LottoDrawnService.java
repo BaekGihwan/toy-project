@@ -22,10 +22,10 @@ public class LottoDrawnService {
     }
 
     public void registerLottoDrawnNumbers(LottoDrawnSdo lottoDrawnSdo) {
-        lottoDrawnStore.save(lottoDrawnSdo);
+        lottoDrawnStore.registerLottoDrawnNumbers(lottoDrawnSdo);
     }
 
-    public List<LottoDrawn> findAllByOrderByDrwNoDesc() {
-        return lottoDrawnStore.findAllByOrderByDrwNoDesc();
+    public List<LottoDrawn> getDrawnNumbersList() {
+        return lottoDrawnStore.getDrawnNumbersList();
     }
 }

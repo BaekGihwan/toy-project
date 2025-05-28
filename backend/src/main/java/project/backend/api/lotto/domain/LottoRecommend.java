@@ -27,16 +27,17 @@ public class LottoRecommend {
     private int recommendNo6;
     private LocalDateTime recommendDate;
 
-    public static LottoRecommend LottoRecommendSdo(LottoRecommendSdo sdo) {
+    // Sdo -> domain
+    public static LottoRecommend LottoRecommendSdo(LottoRecommendSdo lottoRecommendSdo) {
         return LottoRecommend.builder()
-            .recommendNo(sdo.getPurchaseNo())
-            .recommendNo1(sdo.getPurchaseNo1())
-            .recommendNo2(sdo.getPurchaseNo2())
-            .recommendNo3(sdo.getPurchaseNo3())
-            .recommendNo4(sdo.getPurchaseNo4())
-            .recommendNo5(sdo.getPurchaseNo5())
-            .recommendNo6(sdo.getPurchaseNo6())
-            .recommendDate(sdo.getPurchaseDate())
+            .recommendNo(lottoRecommendSdo.getPurchaseNo())
+            .recommendNo1(lottoRecommendSdo.getPurchaseNo1())
+            .recommendNo2(lottoRecommendSdo.getPurchaseNo2())
+            .recommendNo3(lottoRecommendSdo.getPurchaseNo3())
+            .recommendNo4(lottoRecommendSdo.getPurchaseNo4())
+            .recommendNo5(lottoRecommendSdo.getPurchaseNo5())
+            .recommendNo6(lottoRecommendSdo.getPurchaseNo6())
+            .recommendDate(lottoRecommendSdo.getPurchaseDate())
             .build();
     }
 }

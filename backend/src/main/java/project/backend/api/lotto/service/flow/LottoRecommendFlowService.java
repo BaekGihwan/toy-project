@@ -32,7 +32,7 @@ public class LottoRecommendFlowService {
     public List<LottoRecommendSdo> getRecommendedLottoNumbers() {
 
         // 1. 역대 당첨번호 가져오기 && 데이터 가공
-        List<LottoDrawn> drawnResultList = lottoDrawnService.findAllByOrderByDrwNoDesc();
+        List<LottoDrawn> drawnResultList = lottoDrawnService.getDrawnNumbersList();
         // 2. 6자리를 조합하여 drawnCombinedNumber에 넣기
         List<LottoDrawnSdo> drawnResultListAddCombinedNumber = drawnResultList.stream()
             .map(drawnList -> {
@@ -58,7 +58,7 @@ public class LottoRecommendFlowService {
             .toList();
 
         // 3. 추천회차 구매내역 가져오기
-        List<LottoPurchase> purchaseResultList = lottoPurchaseService.findAllByPurchaseNoOrderByPurchaseIdDesc(drawnResultListAddCombinedNumber.get(0).getDrwNo() + 1);
+        List<LottoPurchase> purchaseResultList = lottoPurchaseService.getPurchaseNumbersList(drawnResultListAddCombinedNumber.get(0).getDrwNo() + 1);
         // 4. 6자리를 조합하여 purchaseCombinedNumber에 넣기
         List<LottoRecommendSdo> purchaseResultListAddCombinedNumberAndCount = purchaseResultList.stream()
             .collect(Collectors.groupingBy(

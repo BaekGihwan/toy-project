@@ -15,6 +15,6 @@ public class LottoRecommendService {
     private final LottoRecommendStore lottoRecommendStore;
 
     public void registerLottoRecommendNumbers(LottoRecommend lottoRecommend) {
-        lottoRecommendStore.save(lottoRecommend);
+        lottoRecommendStore.registerLottoRecommendNumbers(lottoRecommend);
     }
 }

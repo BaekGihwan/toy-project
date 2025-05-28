@@ -18,11 +18,11 @@ public class LottoPurchaseStore {
     private final LottoPurchaseRepository lottoPurchaseRepository;
 
     @Transactional
-    public void save(LottoPurchase  lottoPurchase) {
+    public void registerPurchaseLottoNumbers(LottoPurchase  lottoPurchase) {
         lottoPurchaseRepository.save(new LottoPurchaseJpo(lottoPurchase));
     }
 
-    public List<LottoPurchase> findAllByPurchaseNoOrderByPurchaseIdDesc(int purchaseNo) {
+    public List<LottoPurchase> getPurchaseNumbersList(int purchaseNo) {
         return lottoPurchaseRepository.findAllByPurchaseNoOrderByPurchaseIdDesc(purchaseNo).stream()
             .map(LottoPurchaseJpo::toDomain)
             .toList();

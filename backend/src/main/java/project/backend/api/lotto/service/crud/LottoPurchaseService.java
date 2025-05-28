@@ -21,7 +21,7 @@ public class LottoPurchaseService {
     private final Random random = new Random();
 
     @Transactional
-    public void registerPurchaseLotto(LocalDateTime currentDate, int purchaseLottoNo) {
+    public void registerPurchaseLottoNumbers(LocalDateTime currentDate, int purchaseLottoNo) {
         List<Integer> lottoNumbers = generateRandomLottoNumbers();
 
         LottoPurchase lottoPurchase = LottoPurchase.builder()
@@ -35,7 +35,7 @@ public class LottoPurchaseService {
             .purchaseDate(currentDate)
             .build();
 
-        lottoPurchaseStore.save(lottoPurchase);
+        lottoPurchaseStore.registerPurchaseLottoNumbers(lottoPurchase);
     }
 
     private List<Integer> generateRandomLottoNumbers() {
@@ -47,7 +47,7 @@ public class LottoPurchaseService {
             .toList();
     }
 
-    public List<LottoPurchase> findAllByPurchaseNoOrderByPurchaseIdDesc(int targetDrawnNo) {
-        return lottoPurchaseStore.findAllByPurchaseNoOrderByPurchaseIdDesc(targetDrawnNo);
+    public List<LottoPurchase> getPurchaseNumbersList(int targetDrawnNo) {
+        return lottoPurchaseStore.getPurchaseNumbersList(targetDrawnNo);
     }
 }

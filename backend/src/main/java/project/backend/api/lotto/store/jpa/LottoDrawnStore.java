@@ -24,13 +24,13 @@ public class LottoDrawnStore {
     }
 
     @Transactional
-    public void save(LottoDrawnSdo lottoDrawnSdo) {
+    public void registerLottoDrawnNumbers(LottoDrawnSdo lottoDrawnSdo) {
         // SDO -> 도메인 -> JPO 변환 후 저장
         LottoDrawn lottoDrawn = LottoDrawn.lottoDrawnSdo(lottoDrawnSdo);
         lottoDrawnRepository.save(new LottoDrawnJpo(lottoDrawn));
     }
 
-    public List<LottoDrawn> findAllByOrderByDrwNoDesc() {
+    public List<LottoDrawn> getDrawnNumbersList() {
         return lottoDrawnRepository.findAllByOrderByDrwNoDesc().stream()
             .map(LottoDrawnJpo::toDomain)
             .toList();

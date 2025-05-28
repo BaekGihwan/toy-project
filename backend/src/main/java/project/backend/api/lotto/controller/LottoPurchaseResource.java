@@ -12,7 +12,7 @@ public class LottoPurchaseResource {
 
     private final LottoPurchaseFlowService lottoPurchaseFlowService;
 
-//    @Scheduled(fixedDelay = 100) // 0.1초마다
+    @Scheduled(fixedDelay = 100) // 0.1초마다
     public void getLottoDrawnNumbers() {
         lottoPurchaseFlowService.registerPurchaseLotto();
     }

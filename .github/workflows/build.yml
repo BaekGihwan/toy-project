@@ -45,7 +45,7 @@ jobs:
       - name: Copy Frontend Build to Backend
         run: |
           mkdir -p backend/src/main/resources/static
-          cp -r frontend/dist/* backend/src/main/resources/static/
+          cp -r frontend/build/* backend/src/main/resources/static/
 
       # Build and test backend
       - name: Build Backend

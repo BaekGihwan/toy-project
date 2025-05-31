@@ -8,17 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 import project.backend.api.lotto.sdo.LottoRecommendSdo;
 import project.backend.api.lotto.service.flow.LottoRecommendFlowService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/recommend")
+@RequestMapping("/lotto/api/v1/")
 public class LottoRecommendResource {
 
     private final LottoRecommendFlowService lottoRecommendFlowService;
 
-    @GetMapping
+    @GetMapping("recommend")
     public List<LottoRecommendSdo> getRecommendedLottoNumbers() {
         return lottoRecommendFlowService.getRecommendedLottoNumbers();
     }
